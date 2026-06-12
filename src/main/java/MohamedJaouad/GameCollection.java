@@ -21,5 +21,13 @@ private List<Game> games = new ArrayList<>();
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("id non trovato: " + id));
     }
+    public List<Game> findByPrice(double price){
+
+        List<Game> result = games.stream().filter(game -> game.getPrice()<price).toList();
+        if (result.isEmpty()) {
+            throw new IllegalArgumentException("nessun gioco trovato con prezzo inferiore a " + price);
+        }
+        return result;
+    }
 }
 

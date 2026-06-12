@@ -7,6 +7,7 @@ import MohamedJaouad.Games.Game;
 import MohamedJaouad.Games.VideoGame;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,15 +22,17 @@ public class Main {
 
         BoardGame b1 = new BoardGame("Monopoly",
                 LocalDate.of(2000, 1, 1),
-                29.99,
+                20,
                 4,
                 90);
         collection.addGame(v1);
         collection.addGame(b1);
 
-        Game result = collection.findById(1);
+
         System.out.println("Risultato ricerca ID 1:");
-        System.out.println(result);
+        List<Game> lowerPrice=collection.findByPrice(50);
+        lowerPrice.forEach(System.out::println);
+
     }
 }
 
