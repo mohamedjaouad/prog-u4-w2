@@ -51,6 +51,12 @@ private List<Game> games = new ArrayList<>();
             throw new IllegalArgumentException("nessun gioco trovato con questo ID: " + id);
         }
     }
-
+//    ubdateGame method
+public Game ubdateGame(int id,Game newGame){
+        Game oldGame=games.stream().filter(game -> game.getId()==id).findFirst().orElseThrow(() -> new IllegalArgumentException("nessun gioco trovato con questo ID: " + id));
+        games.remove(oldGame);
+        games.add(newGame);
+    return newGame;
+}
 }
 

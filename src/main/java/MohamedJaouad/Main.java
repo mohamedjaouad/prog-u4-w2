@@ -7,7 +7,7 @@ import MohamedJaouad.Games.Game;
 import MohamedJaouad.Games.VideoGame;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -29,8 +29,16 @@ public class Main {
         collection.addGame(b1);
 
         try {
-            collection.removeById(1);
-            System.out.println("Gioco rimosso!");
+            Game updated = collection.ubdateGame(1,
+                    new VideoGame("FIFA 26",
+                            LocalDate.of(2026, 9, 1),
+                            79.99,
+                            Platform.PS5,
+                            "50h",
+                            Type.SPORTS));
+
+            System.out.println("gioco aggiornato: " + updated.getTitle());
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
