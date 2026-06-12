@@ -44,7 +44,13 @@ private List<Game> games = new ArrayList<>();
         }
         return result;
     }
-
+// removeById method
+    public void removeById(int id){
+        boolean remove=games.removeIf(game -> game.getId()==id);
+        if (!remove) {
+            throw new IllegalArgumentException("nessun gioco trovato con questo ID: " + id);
+        }
+    }
 
 }
 

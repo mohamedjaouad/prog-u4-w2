@@ -29,14 +29,12 @@ public class Main {
         collection.addGame(b1);
 
         try {
-            List<BoardGame> list = collection.findByNumPlayers(4);
-            for (BoardGame bg : list) {
-                System.out.println("Nome: " + bg.getTitle());
-                System.out.println("Giocatori: " + bg.getNumPlayers());}
-
+            collection.removeById(1);
+            System.out.println("Gioco rimosso!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+
 
     }
 }
