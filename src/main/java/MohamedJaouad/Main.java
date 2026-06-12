@@ -28,10 +28,15 @@ public class Main {
         collection.addGame(v1);
         collection.addGame(b1);
 
+        try {
+            List<BoardGame> list = collection.findByNumPlayers(4);
+            for (BoardGame bg : list) {
+                System.out.println("Nome: " + bg.getTitle());
+                System.out.println("Giocatori: " + bg.getNumPlayers());}
 
-        System.out.println("Risultato ricerca ID 1:");
-        List<Game> lowerPrice=collection.findByPrice(50);
-        lowerPrice.forEach(System.out::println);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 }

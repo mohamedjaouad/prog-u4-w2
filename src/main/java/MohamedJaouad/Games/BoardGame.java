@@ -3,7 +3,7 @@ package MohamedJaouad.Games;
 import java.time.LocalDate;
 
 public class BoardGame extends Game{
-    private int numPlayers;
+    private static int numPlayers;
     private int averageDuration;
 
     public BoardGame(String title, LocalDate annoPub, double price,int numPlayers,int averageDuration) {
@@ -12,6 +12,7 @@ public class BoardGame extends Game{
         this.averageDuration=averageDuration;
         this.numPlayers=numPlayers;
     }
+    public static int getNumPlayers() { return numPlayers; }
 
     @Override
     public String toString() {
