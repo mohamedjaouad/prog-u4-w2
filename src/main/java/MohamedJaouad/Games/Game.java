@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public abstract class Game {
 
-    private int id;
+    private  int id;
     private String title;
     private LocalDate annoPub;
     private double price;
 
-    private int countID=1;
+    private static int countID=1;
 
     public Game( String title,LocalDate annoPub,double price){
         if (price < 0)
