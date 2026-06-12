@@ -1,4 +1,4 @@
-package MohamedJaouad.Games;
+package MohamedJaouad.Games.Enum;
 
 public enum Type {
         ACTION,

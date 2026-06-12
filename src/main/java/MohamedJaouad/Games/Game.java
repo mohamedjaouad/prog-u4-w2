@@ -12,6 +12,8 @@ public abstract class Game {
     private int countID=1;
 
     public Game( String title,LocalDate annoPub,double price){
+        if (price < 0)
+            throw new IllegalArgumentException("il prezzo deve essere positivo");
         this.id=countID++;
         this.title=title;
         this.annoPub=annoPub;

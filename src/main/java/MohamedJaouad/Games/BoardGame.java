@@ -8,6 +8,8 @@ public class BoardGame extends Game{
 
     public BoardGame(String title, LocalDate annoPub, double price,int numPlayers,int averageDuration) {
         super(title, annoPub, price);
+        if (numPlayers < 2 || numPlayers> 10)
+        throw new IllegalArgumentException("I giocatori devono essere tra 2 e 10");
         this.averageDuration=averageDuration;
         this.numPlayers=numPlayers;
     }
