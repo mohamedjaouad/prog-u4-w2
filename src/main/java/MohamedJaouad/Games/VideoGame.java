@@ -17,13 +17,19 @@ public class VideoGame extends Game {
         this.type=type;
     }
 
+
     @Override
     public String toString() {
-        return "VideoGame{" +
-                "platform=" + platform +
-                ", gameDuration='" + gameDuration + '\'' +
-                ", type=" + type +
-                '}';
+        return
+                "ID: " + getId() + "\n" +
+                "Titolo: " + getTitle() + "\n" +
+                "Anno: " + getAnnoPub() + "\n" +
+                "Prezzo: " + getPrice() + "€\n" +
+                "Piattaforma: " + platform + "\n" +
+                "Durata: " + gameDuration + "\n" +
+                "Genere: " + type+ "\n";
     }
+
+
 }
 

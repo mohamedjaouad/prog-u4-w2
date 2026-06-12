@@ -4,7 +4,9 @@ import MohamedJaouad.Games.BoardGame;
 import MohamedJaouad.Games.Game;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalDouble;
 
 public class GameCollection {
 private List<Game> games = new ArrayList<>();
@@ -12,24 +14,33 @@ private List<Game> games = new ArrayList<>();
     public void addGame(Game newGame) {
         boolean exist = games.stream().anyMatch(game -> game.getId() == newGame.getId());
         if (exist) {
-            throw new IllegalArgumentException("esiste già un gioco con questo ID: " + newGame.getId());
+            System.out.println(" esiste già un gioco con ID: " + newGame.getId());
+            return;
         }
         games.add(newGame);
+
     }
 //    findById method
     public Game findById(int id) {
-        return games.stream()
+        Game result= games.stream()
                 .filter(g -> g.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("id non trovato: " + id));
+                .orElse(null);
+        if (result == null) {
+            System.out.println(" nessun gioco trovato con ID: " + id);
+            return null;
+        }
+        return result;
     }
 //    findByPrice method
     public List<Game> findByPrice(double price){
 
         List<Game> result = games.stream().filter(game -> game.getPrice()<price).toList();
         if (result.isEmpty()) {
-            throw new IllegalArgumentException("nessun gioco trovato con prezzo inferiore a " + price);
+            System.out.println("nessun gioco trovato con prezzo inferiore a " + price);
+            return List.of();
         }
+
         return result;
     }
 //    findByPlayers method
@@ -38,25 +49,72 @@ private List<Game> games = new ArrayList<>();
                 .filter(game -> game instanceof BoardGame).map( game ->(BoardGame) game)
                 .filter(boardGame -> BoardGame.getNumPlayers() == players)
                 .toList();
-        if (result.isEmpty()){
-            throw new IllegalArgumentException(
-                    "nessun gioco da tavolo trovato con questo numnero giocatore " + players);
+        if (result.isEmpty()) {
+            System.out.println("Nessun gioco da tavolo trovato con " + players + " giocatori.");
+            return List.of();
         }
         return result;
     }
 // removeById method
-    public void removeById(int id){
-        boolean remove=games.removeIf(game -> game.getId()==id);
-        if (!remove) {
-            throw new IllegalArgumentException("nessun gioco trovato con questo ID: " + id);
+    public Game removeById(int id){
+        Game toRemove = null;
+
+        for (Game g : games) {
+            if (g.getId() == id) {
+                toRemove = g;
+                break;
+            }
         }
+
+        if (toRemove == null) {
+            System.out.println("nessun gioco trovato con ID: " + id);
+            return null;
+        }
+
+        games.remove(toRemove);
+        return toRemove;
     }
-//    ubdateGame method
-public Game ubdateGame(int id,Game newGame){
-        Game oldGame=games.stream().filter(game -> game.getId()==id).findFirst().orElseThrow(() -> new IllegalArgumentException("nessun gioco trovato con questo ID: " + id));
-        games.remove(oldGame);
-        games.add(newGame);
+
+    //    ubdateGame method
+public Game updateGame(int id, Game newGame){
+    Game oldGame = games.stream()
+            .filter(game -> game.getId() == id)
+            .findFirst()
+            .orElse(null);
+    games.remove(oldGame);
+    games.add(newGame);
     return newGame;
 }
+     public void printStats() {
+
+        if (games.isEmpty()) {
+            System.out.println("nessun gioco presente nella collezione.");
+            return;
+        }
+
+        int total = games.size();
+
+         OptionalDouble avgPrice = games.stream()
+                 .mapToDouble(Game::getPrice)
+                 .average();
+
+         double media = avgPrice.orElse(0);
+
+         Game maxPrice = games.stream()
+                 .max(Comparator.comparingDouble(Game::getPrice))
+                 .orElse(null);
+
+         Game minPrice = games.stream()
+                 .min(Comparator.comparingDouble(Game::getPrice))
+                 .orElse(null);
+
+         System.out.println("totale giochi: " + total + "\n");
+         System.out.println("prezzo medio: " + media + "\n");
+         System.out.println("gioco più costoso: " + maxPrice + "\n");
+         System.out.println("gioco meno costoso: " + minPrice + "\n");
+
+     }
+
 }
+
 

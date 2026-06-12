@@ -2,7 +2,7 @@ package MohamedJaouad.Games;
 
 import java.time.LocalDate;
 
-public abstract class Game {
+public class Game {
 
     private  int id;
     private String title;
@@ -13,7 +13,7 @@ public abstract class Game {
 
     public Game( String title,LocalDate annoPub,double price){
         if (price < 0)
-            throw new IllegalArgumentException("il prezzo deve essere positivo");
+            System.out.println("il prezzo deve essere positivo");
         this.id=countID++;
         this.title=title;
         this.annoPub=annoPub;
@@ -30,12 +30,12 @@ public abstract class Game {
 
     @Override
     public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", annoPub=" + annoPub +
-                ", price=" + price +
-                ", countID=" + countID +
-                '}';
+        return
+                "Titolo: " + title + "\n" +
+                "Anno pubblicazione: " + annoPub + "\n" +
+                "Prezzo: " + price + "€\n" +
+                "ID: " + id + "\n";
     }
+
+
 }
